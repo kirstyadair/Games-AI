@@ -27,7 +27,7 @@ public class NodeEditor : EditorWindow
     void OnEnable()
     {
         style = new GUIStyle();
-        style.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node1.png") as Texture2D;
+        style.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node2.png") as Texture2D;
         style.border = new RectOffset(12, 12, 12, 12);
 
         inConnectionStyle = new GUIStyle();
@@ -41,7 +41,7 @@ public class NodeEditor : EditorWindow
         outConnectionStyle.border = new RectOffset(4, 4, 12, 12);
 
         selectedStyle = new GUIStyle();
-        selectedStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node1 on.png") as Texture2D;
+        selectedStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node2 on.png") as Texture2D;
         selectedStyle.border = new RectOffset(12, 12, 12, 12);
     }
 
@@ -128,7 +128,7 @@ public class NodeEditor : EditorWindow
             nodesList = new List<Node>();
         }
  
-        nodesList.Add(new Node(200, 50, mousePos, style, selectedStyle, inConnectionStyle, outConnectionStyle, OnClickInConnection, OnClickOutConnection, OnClickRemoveNode));
+        nodesList.Add(new Node(150, 100, mousePos, style, selectedStyle, inConnectionStyle, outConnectionStyle, OnClickInConnection, OnClickOutConnection, OnClickRemoveNode));
     }
 
     

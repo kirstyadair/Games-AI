@@ -5,6 +5,7 @@ using UnityEngine;
 public class Node
 {
     public Rect rect;
+    public Rect textRect;
     public GUIStyle style;
     public GUIStyle defaultNodeStyle;
     public GUIStyle selectedNodeStyle;
@@ -39,6 +40,8 @@ public class Node
         inConnection.Draw();
         outConnection.Draw();
         GUI.Box(rect, name, style);
+        textRect = new Rect(rect.xMin, rect.yMin, rect.width * 0.8f, rect.height * 0.8f);
+        GUI.TextField(textRect, "A");
     }
 
 
