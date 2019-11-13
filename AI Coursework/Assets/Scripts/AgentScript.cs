@@ -50,7 +50,7 @@ public class AgentScript : MonoBehaviour
         {
             if (rooms[i].isExitRoom) bestRoom = rooms[i];
             else if (rooms[i].visited) continue;
-            else if (rooms[i].numberOfEnemies < bestRoom.numberOfEnemies) bestRoom = rooms[i];
+            else if (rooms[i].numberOfEnemies <= bestRoom.numberOfEnemies) bestRoom = rooms[i];
             
         }
 
