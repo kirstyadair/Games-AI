@@ -19,7 +19,7 @@ public class EnemyAgentScript : MonoBehaviour
     public float viewDistance;
     public float attackDistance;
     public int hitsRemaining;
-
+    
     Vector3 steeringVelocity = Vector3.zero;
     Vector3 desiredVelocity;
     int currentPatrolPoint = 1;
@@ -59,13 +59,16 @@ public class EnemyAgentScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        currentPatrolPoint++;
-        if (currentPatrolPoint >= patrolPoints.Count)
+        if (other.tag == "PatrolPoint")
         {
-            currentPatrolPoint = 0;
-        }
+            currentPatrolPoint++;
+            if (currentPatrolPoint >= patrolPoints.Count)
+            {
+                currentPatrolPoint = 0;
+            }
 
-        this.transform.rotation = Quaternion.Euler(transform.eulerAngles + new Vector3(0, 0, -90));
+            this.transform.rotation = Quaternion.Euler(transform.eulerAngles + new Vector3(0, 0, -90));
+        }
     }
 
 
@@ -100,9 +103,14 @@ public class EnemyAgentScript : MonoBehaviour
         {
             state = EnemyStates.PATROLLING;
         }
-        else if (distanceBetweenAgents <= attackDistance)
+        else if (distanceBetweenAgents <= attackDistance && !agent.GetComponent<BehaviourTree>().onPath)
         {
             state = EnemyStates.ATTACKING;
+            agent.GetComponent<AgentScript>().currentAttackingEnemies.Add(this);
+        }
+        else
+        {
+            agent.GetComponent<AgentScript>().currentAttackingEnemies.Remove(this);
         }
     }
 

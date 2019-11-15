@@ -9,6 +9,16 @@ public enum State
 
 public class BehaviourTree : MonoBehaviour
 {
+    public bool onPath;
+    public bool enemiesClose;
+    public bool fighting;
+    AgentScript agent;
+    
+
+    void Start()
+    {
+        agent = GetComponent<AgentScript>();
+    }
 
     // Go through the behaviour tree each frame
     void Update()
@@ -20,51 +30,73 @@ public class BehaviourTree : MonoBehaviour
     // Start here
     void StartNode()
     {
-        if (FindRoomDetails() != State.RUNNING)
+        // If not on a path
+        if (OnPath() != State.RUNNING)
         {
-            if (FindRoomDetails() == State.SUCCESS)
+            // If there are enemies around and the agent isn't currently fighting them
+            if (FindNearbyEnemies() == true && SeekEnemy() != State.RUNNING)
             {
-                Debug.Log("find room info success");
+                if (!fighting)
+                {
+                    if (FightEnemies() != State.RUNNING)
+                    {
+                        Debug.Log("Aaaa");
+                    }
+                }
+                
             }
-            else
-            {
-                Debug.Log("find room info fail");
-            }
+            
         }
     }
 
-    State FindRoomDetails()
+    State OnPath()
     {
         State nodeState = new State();
-        if (FindRoomName() == State.SUCCESS && FindRoomEnemies() == State.SUCCESS && FindRoomExits() == State.SUCCESS)
+        // If on a path, return RUNNING
+        if (onPath)
+        {
+            nodeState = State.RUNNING;
+        }
+        // Else return SUCCESS, i.e. the spider has finished using a path and is in a room
+        else
         {
             nodeState = State.SUCCESS;
         }
+        
+        return nodeState;
+    }
+
+    State FightEnemies()
+    {
+        fighting = true;
+        State nodeState = new State();
+        nodeState = State.RUNNING;
+        Debug.Log("this should happen once");
+        agent.Fight();
+        return nodeState;
+    }
+
+    State SeekEnemy()
+    {
+        State nodeState = new State();
+        if (agent.currentAttackingEnemies.Count > 0)
+        {
+            agent.Seek(agent.currentAttackingEnemies[0].gameObject.transform.position, nodeState);
+        }
         else
         {
-            nodeState = State.FAILED;
+            nodeState = State.SUCCESS;
         }
+        
         return nodeState;
     }
 
-    State FindRoomName()
+    bool FindNearbyEnemies()
     {
-        State nodeState = new State();
-        nodeState = State.SUCCESS;
-        return nodeState;
-    }
-
-    State FindRoomEnemies()
-    {
-        State nodeState = new State();
-        nodeState = State.SUCCESS;
-        return nodeState;
-    }
-
-    State FindRoomExits()
-    {
-        State nodeState = new State();
-        nodeState = State.SUCCESS;
-        return nodeState;
+        if (agent.currentRoom.numberOfEnemies > 0)
+        {
+            return true;
+        }
+        else return false;
     }
 }
