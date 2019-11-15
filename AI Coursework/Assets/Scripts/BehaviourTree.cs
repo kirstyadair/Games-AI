@@ -71,7 +71,6 @@ public class BehaviourTree : MonoBehaviour
         fighting = true;
         State nodeState = new State();
         nodeState = State.RUNNING;
-        Debug.Log("this should happen once");
         agent.Fight();
         return nodeState;
     }

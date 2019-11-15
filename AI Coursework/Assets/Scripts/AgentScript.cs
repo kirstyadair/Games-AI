@@ -136,6 +136,7 @@ public class AgentScript : MonoBehaviour
         
             // Once all enemies killed
             Debug.Log("all killed");
+            
         }
         behaviourTree.fighting = false;
     }
