@@ -14,12 +14,15 @@ public class EnemyAgentScript : MonoBehaviour
 {
     public List<Transform> patrolPoints;
     public EnemyStates state;
-    public GameObject agent;
     public Sprite dead;
     public float viewDistance;
     public float attackDistance;
     public int hitsRemaining;
+    public ParticleSystem ps;
     
+    GameObject agent;
+    Animator thisAnim;
+    Room enemyRoom;
     Vector3 steeringVelocity = Vector3.zero;
     Vector3 desiredVelocity;
     int currentPatrolPoint = 1;
@@ -30,6 +33,9 @@ public class EnemyAgentScript : MonoBehaviour
     void Start()
     {
         state = EnemyStates.PATROLLING;
+        thisAnim = GetComponent<Animator>();
+        agent = GameObject.Find("Agent");
+        ps.gameObject.SetActive(false);
     }
 
 
@@ -37,6 +43,11 @@ public class EnemyAgentScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (state != EnemyStates.ATTACKING)
+        {
+            ps.gameObject.SetActive(false);
+        }
+        
         if (state == EnemyStates.PATROLLING)
         {
             Patrol();
@@ -52,6 +63,7 @@ public class EnemyAgentScript : MonoBehaviour
         else if (state == EnemyStates.DEAD)
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = dead;
+            
         }
     }
 
@@ -68,6 +80,10 @@ public class EnemyAgentScript : MonoBehaviour
             }
 
             this.transform.rotation = Quaternion.Euler(transform.eulerAngles + new Vector3(0, 0, -90));
+        }
+        if (other.tag == "Room")
+        {
+            enemyRoom = other.GetComponent<Room>();
         }
     }
 
@@ -107,10 +123,14 @@ public class EnemyAgentScript : MonoBehaviour
         {
             state = EnemyStates.ATTACKING;
             agent.GetComponent<AgentScript>().currentAttackingEnemies.Add(this);
+            thisAnim.SetBool("Fight", true);
+            ps.gameObject.SetActive(true);
         }
         else
         {
             agent.GetComponent<AgentScript>().currentAttackingEnemies.Remove(this);
+            thisAnim.SetBool("Fight", false);
+            ps.gameObject.SetActive(false);
         }
     }
 
@@ -134,6 +154,7 @@ public class EnemyAgentScript : MonoBehaviour
         {
             GetComponent<Animator>().enabled = false;
             state = EnemyStates.DEAD;
+            enemyRoom.numberOfEnemies--;
         }
     }
 
@@ -143,7 +164,7 @@ public class EnemyAgentScript : MonoBehaviour
     {
         // Remove weapon durability from agent
         hitCooldown = 1.0f;
-        StartCoroutine(FlashAgentRed());
+        //StartCoroutine(FlashAgentRed());
     }
 
 

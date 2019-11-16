@@ -110,7 +110,7 @@ public class AgentScript : MonoBehaviour
     {
 		desiredVelocity = Vector3.Normalize(targetPosition - transform.position) * 0.05f;
         transform.position += desiredVelocity;
-        if (Vector3.Distance(transform.position, targetPosition) < 1.0f)
+        if (Vector3.Distance(transform.position, targetPosition) < 1f)
         {
             nodeState = State.SUCCESS;
         }
@@ -129,7 +129,11 @@ public class AgentScript : MonoBehaviour
             {
                 Debug.Log("hit");
                 currentEnemy.hitsRemaining--;
+                //currentEnemy.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+                //yield return new WaitForSeconds(0.1f);
+                //currentEnemy.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
                 yield return new WaitForSeconds(1.0f);
+                
             }
 
             currentAttackingEnemies.Remove(currentEnemy);

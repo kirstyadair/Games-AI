@@ -4,7 +4,12 @@ using UnityEngine;
 
 public enum State
 {
-    FAILED, SUCCESS, RUNNING
+    FAILED, SUCCESS, RUNNING, NULL
+}
+
+public class TreeNode
+{
+    public State state;
 }
 
 public class BehaviourTree : MonoBehaviour
@@ -33,21 +38,25 @@ public class BehaviourTree : MonoBehaviour
         // If not on a path
         if (OnPath() != State.RUNNING)
         {
-            // If there are enemies around and the agent isn't currently fighting them
+            // If there are enemies around and the agent can seek them
             if (FindNearbyEnemies() == true && SeekEnemy() != State.RUNNING)
             {
                 if (!fighting)
                 {
-                    if (FightEnemies() != State.RUNNING)
-                    {
-                        Debug.Log("Aaaa");
-                    }
+                    FightEnemies();
                 }
                 
+            }
+            // There are no enemies or they are all dead
+            else
+            {
+                transform.Translate(Vector3.down * 0.05f);
             }
             
         }
     }
+
+
 
     State OnPath()
     {
@@ -66,6 +75,8 @@ public class BehaviourTree : MonoBehaviour
         return nodeState;
     }
 
+
+
     State FightEnemies()
     {
         fighting = true;
@@ -74,6 +85,8 @@ public class BehaviourTree : MonoBehaviour
         agent.Fight();
         return nodeState;
     }
+
+
 
     State SeekEnemy()
     {
@@ -90,12 +103,11 @@ public class BehaviourTree : MonoBehaviour
         return nodeState;
     }
 
+
+
     bool FindNearbyEnemies()
     {
-        if (agent.currentRoom.numberOfEnemies > 0)
-        {
-            return true;
-        }
+        if (agent.currentRoom.numberOfEnemies > 0) return true;
         else return false;
     }
 }
