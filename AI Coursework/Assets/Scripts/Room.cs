@@ -7,6 +7,6 @@ public class Room : MonoBehaviour
     public bool visited;
     public bool isExitRoom;
     public int numberOfEnemies;
-    public int numberOfClearExits;
+    public int roomsAwayFromExit;
     public List<Room> connectedRooms;
 }

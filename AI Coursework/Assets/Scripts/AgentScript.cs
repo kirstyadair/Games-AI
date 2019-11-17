@@ -6,9 +6,10 @@ public class AgentScript : MonoBehaviour
 {
     public Room startRoom;
     public List<EnemyAgentScript> currentAttackingEnemies;
-    BehaviourTree behaviourTree;
-
     public Room currentRoom;
+
+    Animator animator;
+    BehaviourTree behaviourTree;
     Room nextRoom;
     Vector3 desiredVelocity;
 
@@ -19,6 +20,7 @@ public class AgentScript : MonoBehaviour
         currentRoom = startRoom;
         currentRoom.visited = true;
         behaviourTree = GetComponent<BehaviourTree>();
+        animator = GetComponent<Animator>();
     }
 
 
@@ -43,8 +45,6 @@ public class AgentScript : MonoBehaviour
             transform.position += Vector3.down * 0.1f;
         }
         nextRoom = FindNextRoom();
-        //targetPosition = nextRoom.transform.position;
-        //SeekNextRoom();
     }
 
 
@@ -129,9 +129,6 @@ public class AgentScript : MonoBehaviour
             {
                 Debug.Log("hit");
                 currentEnemy.hitsRemaining--;
-                //currentEnemy.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-                //yield return new WaitForSeconds(0.1f);
-                //currentEnemy.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
                 yield return new WaitForSeconds(1.0f);
                 
             }

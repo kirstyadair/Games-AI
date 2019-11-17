@@ -431,7 +431,7 @@ MonoBehaviour:
   visited: 0
   isExitRoom: 0
   numberOfEnemies: 0
-  numberOfClearExits: 1
+  roomsAwayFromExit: 4
   connectedRooms:
   - {fileID: 1768854189}
 --- !u!61 &95422523
@@ -557,7 +557,7 @@ MonoBehaviour:
   visited: 0
   isExitRoom: 0
   numberOfEnemies: 0
-  numberOfClearExits: 0
+  roomsAwayFromExit: 1
   connectedRooms:
   - {fileID: 650423133}
   - {fileID: 1080328083}
@@ -752,7 +752,7 @@ MonoBehaviour:
   visited: 0
   isExitRoom: 0
   numberOfEnemies: 12222
-  numberOfClearExits: 0
+  roomsAwayFromExit: 2
   connectedRooms:
   - {fileID: 1566149327}
   - {fileID: 96493994}
@@ -1390,7 +1390,7 @@ MonoBehaviour:
   visited: 0
   isExitRoom: 0
   numberOfEnemies: 5
-  numberOfClearExits: 0
+  roomsAwayFromExit: 2
   connectedRooms:
   - {fileID: 1768854189}
   - {fileID: 96493994}
@@ -1624,7 +1624,7 @@ MonoBehaviour:
   visited: 0
   isExitRoom: 0
   numberOfEnemies: 0
-  numberOfClearExits: 0
+  roomsAwayFromExit: 4
   connectedRooms:
   - {fileID: 1614878001}
   - {fileID: 1566149327}
@@ -1915,7 +1915,7 @@ MonoBehaviour:
   visited: 0
   isExitRoom: 0
   numberOfEnemies: 0
-  numberOfClearExits: 0
+  roomsAwayFromExit: 3
   connectedRooms:
   - {fileID: 2125786371}
   - {fileID: 1254620825}
@@ -2042,7 +2042,7 @@ MonoBehaviour:
   visited: 0
   isExitRoom: 1
   numberOfEnemies: 0
-  numberOfClearExits: 0
+  roomsAwayFromExit: 0
   connectedRooms: []
 --- !u!61 &1080328084
 BoxCollider2D:
@@ -2167,7 +2167,7 @@ MonoBehaviour:
   visited: 0
   isExitRoom: 0
   numberOfEnemies: 0
-  numberOfClearExits: 0
+  roomsAwayFromExit: 2
   connectedRooms:
   - {fileID: 942747032}
   - {fileID: 96493994}
@@ -2294,7 +2294,7 @@ MonoBehaviour:
   visited: 0
   isExitRoom: 0
   numberOfEnemies: 0
-  numberOfClearExits: 0
+  roomsAwayFromExit: 4
   connectedRooms:
   - {fileID: 1768854189}
   - {fileID: 2125786371}
@@ -2635,7 +2635,7 @@ MonoBehaviour:
   visited: 0
   isExitRoom: 0
   numberOfEnemies: 0
-  numberOfClearExits: 0
+  roomsAwayFromExit: 3
   connectedRooms:
   - {fileID: 762366151}
   - {fileID: 182404399}
@@ -2745,7 +2745,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1605057112}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -6.51, y: 0, z: 0}
+  m_LocalPosition: {x: -10.2, y: -0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2934,7 +2934,7 @@ MonoBehaviour:
   visited: 0
   isExitRoom: 0
   numberOfEnemies: 1
-  numberOfClearExits: 0
+  roomsAwayFromExit: 4
   connectedRooms:
   - {fileID: 762366151}
   - {fileID: 1768854189}
@@ -3274,8 +3274,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visited: 0
   isExitRoom: 0
-  numberOfEnemies: 2
-  numberOfClearExits: 3
+  numberOfEnemies: 1
+  roomsAwayFromExit: 3
   connectedRooms:
   - {fileID: 1278916925}
   - {fileID: 1614878001}
@@ -3521,80 +3521,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.76172, y: 2.08}
   m_EdgeRadius: 0
---- !u!1001 &2039487437
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7172426096452998585, guid: 8019763906b13084ba5e797e864a5439,
-        type: 3}
-      propertyPath: m_Name
-      value: Enemy (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7172426096452998585, guid: 8019763906b13084ba5e797e864a5439,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -5.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.72
-      objectReference: {fileID: 0}
-    - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -3.0939453
-      objectReference: {fileID: 0}
-    - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 180
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8019763906b13084ba5e797e864a5439, type: 3}
 --- !u!1 &2125786368
 GameObject:
   m_ObjectHideFlags: 0
@@ -3692,7 +3618,7 @@ MonoBehaviour:
   visited: 0
   isExitRoom: 0
   numberOfEnemies: 1
-  numberOfClearExits: 0
+  roomsAwayFromExit: 4
   connectedRooms:
   - {fileID: 1278916925}
   - {fileID: 942747032}
@@ -3788,6 +3714,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172426097673476705, guid: 8019763906b13084ba5e797e864a5439,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8019763906b13084ba5e797e864a5439, type: 3}

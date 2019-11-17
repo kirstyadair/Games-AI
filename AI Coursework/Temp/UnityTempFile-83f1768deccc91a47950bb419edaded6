@@ -290,6 +290,7 @@
 /define:CSHARP_7_3_OR_NEWER
 Assets\Scripts\AgentScript.cs
 Assets\Scripts\BehaviourTree.cs
+Assets\Scripts\Door.cs
 Assets\Scripts\EnemyAgentScript.cs
 "Assets\Scripts\Node Editor\Connection.cs"
 "Assets\Scripts\Node Editor\Node.cs"

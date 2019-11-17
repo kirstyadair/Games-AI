@@ -41,8 +41,10 @@ public class BehaviourTree : MonoBehaviour
             // If there are enemies around and the agent can seek them
             if (FindNearbyEnemies() == true && SeekEnemy() != State.RUNNING)
             {
+                // If not already fighting
                 if (!fighting)
                 {
+                    // Fight enemies until they are all dead
                     FightEnemies();
                 }
                 
@@ -50,7 +52,9 @@ public class BehaviourTree : MonoBehaviour
             // There are no enemies or they are all dead
             else
             {
-                transform.Translate(Vector3.down * 0.05f);
+                // Find the next room based on how close it is to the exit room
+
+                // C
             }
             
         }
