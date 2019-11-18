@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum State
 {
-    FAILED, SUCCESS, RUNNING, NULL
+    FAILED, SUCCESS, RUNNING
 }
 
 public class TreeNode
@@ -17,6 +17,7 @@ public class BehaviourTree : MonoBehaviour
     public bool onPath;
     public bool enemiesClose;
     public bool fighting;
+    int exitAttempted = 0;
     AgentScript agent;
     
 
@@ -52,9 +53,19 @@ public class BehaviourTree : MonoBehaviour
             // There are no enemies or they are all dead
             else
             {
-                // Find the next room based on how close it is to the exit room
+                // If there is a path through this room
+                if (FindExitsInRoom() > 0)
+                {
+                    if (WalkToDoor() == State.SUCCESS)
+                    {
+                        Debug.Log("Door reached");
+                    }
+                }
+                else
+                {
+                    // Return to the previous room, mark door as a failure
 
-                // C
+                }
             }
             
         }
@@ -113,5 +124,33 @@ public class BehaviourTree : MonoBehaviour
     {
         if (agent.currentRoom.numberOfEnemies > 0) return true;
         else return false;
+    }
+
+
+
+    int FindExitsInRoom()
+    {
+        int exitCount = agent.currentRoom.exits.Count;
+
+        for (int i = 0; i < agent.currentRoom.exits.Count; i++)
+        {
+            if (!agent.currentRoom.exits[i].isViableExit)
+            {
+                exitCount--;
+            }
+        }
+        return exitCount;
+    }
+
+
+
+    State WalkToDoor()
+    {
+        State nodeState = new State();
+        nodeState = State.RUNNING;
+        
+        agent.MoveToDoor(nodeState);
+        Debug.Log(nodeState);
+        return nodeState;
     }
 }

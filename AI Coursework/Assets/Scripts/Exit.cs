@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Window : MonoBehaviour
+public class Exit : MonoBehaviour
 {
     public bool isBlocked;
     public float timeToNextRoom;
+    public bool isViableExit;
 }

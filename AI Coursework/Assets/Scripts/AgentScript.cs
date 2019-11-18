@@ -7,6 +7,7 @@ public class AgentScript : MonoBehaviour
     public Room startRoom;
     public List<EnemyAgentScript> currentAttackingEnemies;
     public Room currentRoom;
+    public Exit lastUsedDoor;
 
     Animator animator;
     BehaviourTree behaviourTree;
@@ -112,9 +113,9 @@ public class AgentScript : MonoBehaviour
         transform.position += desiredVelocity;
         if (Vector3.Distance(transform.position, targetPosition) < 1f)
         {
+            Debug.Log(Vector3.Distance(transform.position, targetPosition));
             nodeState = State.SUCCESS;
         }
-        
     }
 
 
@@ -140,5 +141,16 @@ public class AgentScript : MonoBehaviour
             
         }
         behaviourTree.fighting = false;
+    }
+
+
+
+    public void MoveToDoor(State nodeState)
+    {
+        List<Exit> doors = currentRoom.exits;
+        if (doors[0].isViableExit && !doors[0].isBlocked)
+        {
+            Seek(doors[0].transform.position, nodeState);
+        }
     }
 }
