@@ -107,13 +107,14 @@ public class AgentScript : MonoBehaviour
 
 
 
-    public void Seek(Vector3 targetPosition, State nodeState)
+    public void Seek(Vector3 targetPosition, ref State nodeState)
     {
+        Debug.Log("A");
 		desiredVelocity = Vector3.Normalize(targetPosition - transform.position) * 0.05f;
         transform.position += desiredVelocity;
         if (Vector3.Distance(transform.position, targetPosition) < 1f)
         {
-            Debug.Log(Vector3.Distance(transform.position, targetPosition));
+            Debug.Log("B");
             nodeState = State.SUCCESS;
         }
     }
@@ -128,7 +129,6 @@ public class AgentScript : MonoBehaviour
             // while current enemy has health
             while (currentEnemy.hitsRemaining > 0)
             {
-                Debug.Log("hit");
                 currentEnemy.hitsRemaining--;
                 yield return new WaitForSeconds(1.0f);
                 
@@ -145,12 +145,11 @@ public class AgentScript : MonoBehaviour
 
 
 
-    public void MoveToDoor(State nodeState)
+    public void MoveToDoor(Exit exit, ref State nodeState)
     {
-        List<Exit> doors = currentRoom.exits;
-        if (doors[0].isViableExit && !doors[0].isBlocked)
+        if (exit.isViableExit)
         {
-            Seek(doors[0].transform.position, nodeState);
+            Seek(exit.transform.position, ref nodeState);
         }
     }
 }

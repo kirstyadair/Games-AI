@@ -7,11 +7,6 @@ public enum State
     FAILED, SUCCESS, RUNNING
 }
 
-public class TreeNode
-{
-    public State state;
-}
-
 public class BehaviourTree : MonoBehaviour
 {
     public bool onPath;
@@ -37,10 +32,10 @@ public class BehaviourTree : MonoBehaviour
     void StartNode()
     {
         // If not on a path
-        if (OnPath() != State.RUNNING)
-        {
+        //if (OnPath() != State.RUNNING)
+        //{
             // If there are enemies around and the agent can seek them
-            if (FindNearbyEnemies() == true && SeekEnemy() != State.RUNNING)
+            if (FindNearbyEnemies() == true && SeekEnemy() != State.RUNNING && OnPath() != State.RUNNING)
             {
                 // If not already fighting
                 if (!fighting)
@@ -54,12 +49,17 @@ public class BehaviourTree : MonoBehaviour
             else
             {
                 // If there is a path through this room
-                if (FindExitsInRoom() > 0)
+                if (FindExitsInRoom() == 1)
                 {
-                    if (WalkToDoor() == State.SUCCESS)
+                    if (WalkToDoor(agent.currentRoom.exits[0]) == State.SUCCESS)
                     {
-                        Debug.Log("Door reached");
+                        
+                        TryDoor(agent.currentRoom.exits[0]);
                     }
+                }
+                else if (FindExitsInRoom() > 1)
+                {
+                    WalkToDoor(FindFastestRoute());
                 }
                 else
                 {
@@ -68,7 +68,7 @@ public class BehaviourTree : MonoBehaviour
                 }
             }
             
-        }
+        //}
     }
 
 
@@ -108,7 +108,7 @@ public class BehaviourTree : MonoBehaviour
         State nodeState = new State();
         if (agent.currentAttackingEnemies.Count > 0)
         {
-            agent.Seek(agent.currentAttackingEnemies[0].gameObject.transform.position, nodeState);
+            agent.Seek(agent.currentAttackingEnemies[0].gameObject.transform.position, ref nodeState);
         }
         else
         {
@@ -144,13 +144,40 @@ public class BehaviourTree : MonoBehaviour
 
 
 
-    State WalkToDoor()
+    State WalkToDoor(Exit exit)
     {
         State nodeState = new State();
-        nodeState = State.RUNNING;
-        
-        agent.MoveToDoor(nodeState);
-        Debug.Log(nodeState);
+        agent.MoveToDoor(exit, ref nodeState);
+
+        if (nodeState != State.SUCCESS)
+        {
+            nodeState = State.RUNNING;
+        }
         return nodeState;
+    }
+
+
+
+    State TryDoor(Exit exit)
+    {
+        State nodeState = new State();
+        if (exit.isBlocked) nodeState = State.FAILED;
+        else agent.Seek(exit.roomForwards.gameObject.transform.position, ref nodeState);
+        return nodeState;
+    }
+
+
+
+    Exit FindFastestRoute()
+    {
+        Exit currentFastest = agent.currentRoom.exits[0];
+        for (int i = 1; i < agent.currentRoom.exits.Count; i++)
+        {
+            if (agent.currentRoom.exits[i].roomsToExitRoom < currentFastest.roomsToExitRoom)
+            {
+                currentFastest = agent.currentRoom.exits[i];
+            }
+        }
+        return currentFastest;
     }
 }

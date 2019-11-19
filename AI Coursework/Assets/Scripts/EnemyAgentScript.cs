@@ -100,7 +100,7 @@ public class EnemyAgentScript : MonoBehaviour
 
         // Check if the agent is within viewing distance of the enemy
         float distanceBetweenAgents = Vector3.Distance(agent.transform.position, gameObject.transform.position);
-        if (distanceBetweenAgents <= viewDistance)
+        if (distanceBetweenAgents <= viewDistance && !agent.GetComponent<BehaviourTree>().onPath)
         {
             state = EnemyStates.SEEKING;
         }
