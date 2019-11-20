@@ -7,11 +7,11 @@ public class AgentScript : MonoBehaviour
     public Room startRoom;
     public List<EnemyAgentScript> currentAttackingEnemies;
     public Room currentRoom;
+    public Room nextRoom;
     public Exit lastUsedDoor;
 
     Animator animator;
     BehaviourTree behaviourTree;
-    Room nextRoom;
     Vector3 desiredVelocity;
 
 
@@ -45,7 +45,6 @@ public class AgentScript : MonoBehaviour
         {
             transform.position += Vector3.down * 0.1f;
         }
-        nextRoom = FindNextRoom();
     }
 
 
@@ -109,13 +108,16 @@ public class AgentScript : MonoBehaviour
 
     public void Seek(Vector3 targetPosition, ref State nodeState)
     {
-        Debug.Log("A");
 		desiredVelocity = Vector3.Normalize(targetPosition - transform.position) * 0.05f;
         transform.position += desiredVelocity;
+        Debug.Log(Vector3.Distance(transform.position, targetPosition));
         if (Vector3.Distance(transform.position, targetPosition) < 1f)
         {
-            Debug.Log("B");
             nodeState = State.SUCCESS;
+        }
+        else
+        {
+            nodeState = State.RUNNING;
         }
     }
 
@@ -150,6 +152,7 @@ public class AgentScript : MonoBehaviour
         if (exit.isViableExit)
         {
             Seek(exit.transform.position, ref nodeState);
+            
         }
     }
 }

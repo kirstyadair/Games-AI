@@ -12,13 +12,16 @@ public class BehaviourTree : MonoBehaviour
     public bool onPath;
     public bool enemiesClose;
     public bool fighting;
+    public bool doorReached;
     int exitAttempted = 0;
+    public Room chosenRoom;
     AgentScript agent;
     
 
     void Start()
     {
         agent = GetComponent<AgentScript>();
+        chosenRoom = agent.currentRoom;
     }
 
     // Go through the behaviour tree each frame
@@ -51,10 +54,9 @@ public class BehaviourTree : MonoBehaviour
                 // If there is a path through this room
                 if (FindExitsInRoom() == 1)
                 {
-                    if (WalkToDoor(agent.currentRoom.exits[0]) == State.SUCCESS)
+                    if (WalkToDoor(chosenRoom.exits[0]) == State.SUCCESS)
                     {
-                        
-                        TryDoor(agent.currentRoom.exits[0]);
+                        TryDoor(chosenRoom.exits[0]);
                     }
                 }
                 else if (FindExitsInRoom() > 1)
@@ -122,7 +124,7 @@ public class BehaviourTree : MonoBehaviour
 
     bool FindNearbyEnemies()
     {
-        if (agent.currentRoom.numberOfEnemies > 0) return true;
+        if (chosenRoom.numberOfEnemies > 0) return true;
         else return false;
     }
 
@@ -130,11 +132,11 @@ public class BehaviourTree : MonoBehaviour
 
     int FindExitsInRoom()
     {
-        int exitCount = agent.currentRoom.exits.Count;
+        int exitCount = chosenRoom.exits.Count;
 
-        for (int i = 0; i < agent.currentRoom.exits.Count; i++)
+        for (int i = 0; i < chosenRoom.exits.Count; i++)
         {
-            if (!agent.currentRoom.exits[i].isViableExit)
+            if (!chosenRoom.exits[i].isViableExit)
             {
                 exitCount--;
             }
@@ -146,14 +148,21 @@ public class BehaviourTree : MonoBehaviour
 
     State WalkToDoor(Exit exit)
     {
-        State nodeState = new State();
-        agent.MoveToDoor(exit, ref nodeState);
-
-        if (nodeState != State.SUCCESS)
+        if (!doorReached)
         {
-            nodeState = State.RUNNING;
+            State nodeState = new State();
+            agent.MoveToDoor(exit, ref nodeState);
+            if (nodeState == State.SUCCESS)
+            {
+                doorReached = true;
+            }
+            else
+            {
+                doorReached = false;
+            }
+            return nodeState;
         }
-        return nodeState;
+        else return State.SUCCESS;
     }
 
 
@@ -162,7 +171,14 @@ public class BehaviourTree : MonoBehaviour
     {
         State nodeState = new State();
         if (exit.isBlocked) nodeState = State.FAILED;
-        else agent.Seek(exit.roomForwards.gameObject.transform.position, ref nodeState);
+        else 
+        {
+            agent.Seek(exit.roomForwards.gameObject.GetComponent<Collider2D>().bounds.center, ref nodeState);
+            if (nodeState == State.SUCCESS)
+            {
+                chosenRoom = agent.currentRoom;
+            }
+        }
         return nodeState;
     }
 

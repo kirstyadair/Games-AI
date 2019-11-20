@@ -475,7 +475,7 @@ GameObject:
   - component: {fileID: 96493994}
   - component: {fileID: 96493995}
   m_Layer: 0
-  m_Name: Room
+  m_Name: 3WayRoomB
   m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -641,6 +641,8 @@ MonoBehaviour:
   roomsToExitRoom: 1
   isViableExit: 1
   type: 0
+  roomForwards: {fileID: 1080328083}
+  roomBack: {fileID: 96493994}
 --- !u!212 &151748946
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -769,7 +771,7 @@ GameObject:
   - component: {fileID: 182404399}
   - component: {fileID: 182404400}
   m_Layer: 0
-  m_Name: Room
+  m_Name: Room1d
   m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1040,6 +1042,8 @@ MonoBehaviour:
   roomsToExitRoom: 3
   isViableExit: 1
   type: 0
+  roomForwards: {fileID: 650423133}
+  roomBack: {fileID: 1768854189}
 --- !u!212 &339957276
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1541,6 +1545,8 @@ MonoBehaviour:
   roomsToExitRoom: 5
   isViableExit: 1
   type: 0
+  roomForwards: {fileID: 762366151}
+  roomBack: {fileID: 1614878001}
 --- !u!212 &646121021
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1839,7 +1845,7 @@ GameObject:
   - component: {fileID: 762366151}
   - component: {fileID: 762366152}
   m_Layer: 0
-  m_Name: Room
+  m_Name: Room1b
   m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2181,6 +2187,8 @@ MonoBehaviour:
   roomsToExitRoom: 6
   isViableExit: 1
   type: 0
+  roomForwards: {fileID: 1278916925}
+  roomBack: {fileID: 1768854189}
 --- !u!212 &921584143
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2243,7 +2251,7 @@ GameObject:
   - component: {fileID: 942747032}
   - component: {fileID: 942747033}
   m_Layer: 0
-  m_Name: Room
+  m_Name: Room2c
   m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2407,6 +2415,8 @@ MonoBehaviour:
   roomsToExitRoom: 2
   isViableExit: 1
   type: 0
+  roomForwards: {fileID: 96493994}
+  roomBack: {fileID: 1254620825}
 --- !u!212 &1035279914
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2630,6 +2640,8 @@ MonoBehaviour:
   roomsToExitRoom: 4
   isViableExit: 1
   type: 0
+  roomForwards: {fileID: 942747032}
+  roomBack: {fileID: 2125786371}
 --- !u!212 &1137791586
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2727,6 +2739,8 @@ MonoBehaviour:
   roomsToExitRoom: 3
   isViableExit: 1
   type: 0
+  roomForwards: {fileID: 1254620825}
+  roomBack: {fileID: 942747032}
 --- !u!212 &1232318710
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2824,6 +2838,8 @@ MonoBehaviour:
   roomsToExitRoom: 2
   isViableExit: 1
   type: 0
+  roomForwards: {fileID: 96493994}
+  roomBack: {fileID: 182404399}
 --- !u!212 &1249546306
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2886,7 +2902,7 @@ GameObject:
   - component: {fileID: 1254620825}
   - component: {fileID: 1254620826}
   m_Layer: 0
-  m_Name: Room
+  m_Name: Room2d
   m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3015,7 +3031,7 @@ GameObject:
   - component: {fileID: 1278916925}
   - component: {fileID: 1278916926}
   m_Layer: 0
-  m_Name: Room
+  m_Name: Room2a
   m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3179,6 +3195,8 @@ MonoBehaviour:
   roomsToExitRoom: 3
   isViableExit: 1
   type: 0
+  roomForwards: {fileID: 182404399}
+  roomBack: {fileID: 1566149327}
 --- !u!212 &1308835083
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3276,6 +3294,8 @@ MonoBehaviour:
   roomsToExitRoom: 4
   isViableExit: 1
   type: 0
+  roomForwards: {fileID: 1566149327}
+  roomBack: {fileID: 762366151}
 --- !u!212 &1357154725
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3587,6 +3607,8 @@ MonoBehaviour:
   roomsToExitRoom: 2
   isViableExit: 1
   type: 0
+  roomForwards: {fileID: 96493994}
+  roomBack: {fileID: 650423133}
 --- !u!212 &1475598745
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3684,6 +3706,8 @@ MonoBehaviour:
   roomsToExitRoom: 6
   isViableExit: 1
   type: 0
+  roomForwards: {fileID: 1614878001}
+  roomBack: {fileID: 1768854189}
 --- !u!212 &1479624454
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3746,7 +3770,7 @@ GameObject:
   - component: {fileID: 1566149327}
   - component: {fileID: 1566149328}
   m_Layer: 0
-  m_Name: Room
+  m_Name: Room1c
   m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3942,7 +3966,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1605057112}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -6.21, y: -0, z: 0}
+  m_LocalPosition: {x: -9, y: -0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4048,7 +4072,7 @@ GameObject:
   - component: {fileID: 1614878001}
   - component: {fileID: 1614878002}
   m_Layer: 0
-  m_Name: Room
+  m_Name: Room1a
   m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4426,6 +4450,8 @@ MonoBehaviour:
   roomsToExitRoom: 4
   isViableExit: 1
   type: 0
+  roomForwards: {fileID: 1768854189}
+  roomBack: {fileID: 95422522}
 --- !u!212 &1742888690
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4488,7 +4514,7 @@ GameObject:
   - component: {fileID: 1768854189}
   - component: {fileID: 1768854190}
   m_Layer: 0
-  m_Name: Room
+  m_Name: 3WayRoomA
   m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4870,6 +4896,8 @@ MonoBehaviour:
   roomsToExitRoom: 5
   isViableExit: 1
   type: 0
+  roomForwards: {fileID: 2125786371}
+  roomBack: {fileID: 1278916925}
 --- !u!212 &2095553581
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4932,7 +4960,7 @@ GameObject:
   - component: {fileID: 2125786371}
   - component: {fileID: 2125786372}
   m_Layer: 0
-  m_Name: Room
+  m_Name: Room2b
   m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
