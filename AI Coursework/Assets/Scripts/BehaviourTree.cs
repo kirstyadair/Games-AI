@@ -177,6 +177,7 @@ public class BehaviourTree : MonoBehaviour
             if (nodeState == State.SUCCESS)
             {
                 chosenRoom = agent.currentRoom;
+                doorReached = false;
             }
         }
         return nodeState;
