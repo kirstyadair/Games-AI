@@ -7,6 +7,7 @@ TagManager:
   - Room
   - PatrolPoint
   - Path
+  - Exit
   layers:
   - Default
   - TransparentFX

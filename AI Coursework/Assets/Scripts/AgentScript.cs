@@ -60,6 +60,10 @@ public class AgentScript : MonoBehaviour
         {
             behaviourTree.onPath = true;
         }
+        if (other.tag == "Exit")
+        {
+            //behaviourTree.doorReached = true;
+        }
     }
 
 
@@ -69,6 +73,10 @@ public class AgentScript : MonoBehaviour
         if (other.tag == "Path")
         {
             behaviourTree.onPath = false;
+        }
+        if (other.tag == "Exit")
+        {
+            //behaviourTree.doorReached = false;
         }
     }
 
@@ -110,7 +118,6 @@ public class AgentScript : MonoBehaviour
     {
 		desiredVelocity = Vector3.Normalize(targetPosition - transform.position) * 0.05f;
         transform.position += desiredVelocity;
-        Debug.Log(Vector3.Distance(transform.position, targetPosition));
         if (Vector3.Distance(transform.position, targetPosition) < 1f)
         {
             nodeState = State.SUCCESS;

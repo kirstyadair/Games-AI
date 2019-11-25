@@ -10,4 +10,5 @@ public class Room : MonoBehaviour
     public int roomsAwayFromExit;
     public List<Room> connectedRooms;
     public List<Exit> exits;
+    public List<EnemyAgentScript> enemies;
 }
