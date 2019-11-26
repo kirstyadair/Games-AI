@@ -137,15 +137,11 @@ public class BehaviourTree : MonoBehaviour
             // Find number of doors in this room
             for (int i = 0; i < chosenRoom.exits.Count; i++)
             {
-                if (!chosenRoom.exits[i].reached)
-                {
-                    chosenRoom.exits[i].priority = 0;
-                }
+                chosenRoom.exits[i].priority = 0;
 
-                if (chosenRoom.exits[i].type == ExitType.DOOR)
-                {
-                    chosenRoom.exits[i].priority++;
-                }
+                if (chosenRoom.exits[i].type == ExitType.DOOR) chosenRoom.exits[i].priority++;
+                if (chosenRoom.exits[i].isBlocked) chosenRoom.exits[i].priority -= 10;
+
                 chosenRoom.exits[i].priority -= (int)chosenRoom.exits[i].roomsToExitRoom;
             }
 
@@ -220,11 +216,7 @@ public class BehaviourTree : MonoBehaviour
     State OpenDoor(Exit exit)
     {
         State nodeState = State.RUNNING;
-        if (exit.isBlocked)
-        {
-            exit.priority -= 10;
-        }
-        else nodeState = State.SUCCESS;
+        if (!exit.isBlocked) nodeState = State.SUCCESS;
 
         return nodeState;
     }
