@@ -9,6 +9,7 @@ public class AgentScript : MonoBehaviour
     public Room currentRoom;
     public Room nextRoom;
     public Exit lastUsedDoor;
+    public float speed;
 
     Animator animator;
     BehaviourTree behaviourTree;
@@ -18,6 +19,7 @@ public class AgentScript : MonoBehaviour
 
     void Start()
     {
+        speed = 0.05f;
         currentRoom = startRoom;
         currentRoom.visited = true;
         behaviourTree = GetComponent<BehaviourTree>();
@@ -112,7 +114,7 @@ public class AgentScript : MonoBehaviour
 
     public void Seek(Vector3 targetPosition, ref State nodeState)
     {
-		desiredVelocity = Vector3.Normalize(targetPosition - transform.position) * 0.05f;
+		desiredVelocity = Vector3.Normalize(targetPosition - transform.position) * speed;
         transform.position += desiredVelocity;
         if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
         {

@@ -10,9 +10,7 @@ public enum State
 public class BehaviourTree : MonoBehaviour
 {
     public bool onPath;
-    public bool enemiesClose;
     public bool fighting;
-    //public bool doorReached;
     public Room chosenRoom;
     public EnemyAgentScript selectedEnemy;
     AgentScript agent;
@@ -26,12 +24,16 @@ public class BehaviourTree : MonoBehaviour
         enemies = chosenRoom.enemies;
     }
 
+
+
     // Go through the behaviour tree each frame
     void Update()
     {
         chosenRoom = agent.currentRoom;
         StartNode();
     }
+
+
 
     void StartNode()
     {
@@ -62,11 +64,15 @@ public class BehaviourTree : MonoBehaviour
         }
     }
 
+
+
     int FindEnemies()
     {
         int count = chosenRoom.enemies.Count;
         return count;
     }
+
+
 
     State AttackEnemies()
     {
@@ -82,63 +88,6 @@ public class BehaviourTree : MonoBehaviour
         return nodeState;
     }
 
-/*
-    // Start here
-    void StartNode()
-    {
-       // If there are enemies around and the agent can seek them
-        if (FindNearbyEnemies() == true && SeekEnemy() != State.RUNNING)
-        {
-            // If not already fighting
-            if (!fighting)
-            {
-                // Fight enemies until they are all dead
-                FightEnemies();
-            }
-            
-        }
-        // There are no enemies or they are all dead
-        else
-        {
-            // If there is a path through this room
-            if (FindExitsInRoom() == 1)
-            {
-                if (WalkToDoor(chosenRoom.exits[0]) == State.SUCCESS)
-                {
-                    TryDoor(chosenRoom.exits[0]);
-                }
-            }
-            else if (FindExitsInRoom() > 1)
-            {
-                WalkToDoor(FindFastestRoute());
-            }
-            else
-            {
-                // Return to the previous room, mark door as a failure
-
-            }
-        }
-    }
-
-
-
-    State OnPath()
-    {
-        State nodeState = new State();
-        // If on a path, return RUNNING
-        if (onPath)
-        {
-            nodeState = State.RUNNING;
-        }
-        // Else return SUCCESS, i.e. the spider has finished using a path and is in a room
-        else
-        {
-            nodeState = State.SUCCESS;
-        }
-        
-        return nodeState;
-    }
-*/
 
 
     State FightEnemies()
@@ -181,48 +130,64 @@ public class BehaviourTree : MonoBehaviour
 
     State FindPathThroughThisRoom()
     {
-        State nodeState = new State();
+        State nodeState = State.RUNNING;
 
-        // Find number of doors in this room
-        for (int i = 0; i < chosenRoom.exits.Count; i++)
+        if (!chosenRoom.isExitRoom)
         {
-            chosenRoom.exits[i].priority = 0;
-
-            if (chosenRoom.exits[i].type == ExitType.DOOR)
+            // Find number of doors in this room
+            for (int i = 0; i < chosenRoom.exits.Count; i++)
             {
-                chosenRoom.exits[i].priority++;
-            }
-            chosenRoom.exits[i].priority -= (int)chosenRoom.exits[i].roomsToExitRoom;
-        }
-
-        Exit bestExit = chosenRoom.exits[0];
-
-        for (int i = 1; i < chosenRoom.exits.Count; i++)
-        {
-            if (chosenRoom.exits[i].priority > bestExit.priority) bestExit = chosenRoom.exits[i];
-        }
-
-        if (WalkToDoor(bestExit) == State.SUCCESS)
-        {
-            /*if (OpenDoor(bestExit) == State.SUCCESS)
-            {
-                if (GoThroughDoor(bestExit) == State.SUCCESS)
+                if (!chosenRoom.exits[i].reached)
                 {
-                    nodeState = State.SUCCESS;
+                    chosenRoom.exits[i].priority = 0;
                 }
-                else if (GoThroughDoor(bestExit) == State.FAILED)
+
+                if (chosenRoom.exits[i].type == ExitType.DOOR)
+                {
+                    chosenRoom.exits[i].priority++;
+                }
+                chosenRoom.exits[i].priority -= (int)chosenRoom.exits[i].roomsToExitRoom;
+            }
+
+            Exit bestExit = chosenRoom.exits[0];
+
+            for (int i = 1; i < chosenRoom.exits.Count; i++)
+            {
+                if (chosenRoom.exits[i].priority > bestExit.priority) bestExit = chosenRoom.exits[i];
+            }
+
+            Debug.Log(bestExit.gameObject.name);
+
+            if (WalkToDoor(bestExit) == State.SUCCESS)
+            {
+                if (OpenDoor(bestExit) == State.SUCCESS)
+                {
+                    if (GoThroughDoor(bestExit) == State.SUCCESS)
+                    {
+                        nodeState = State.SUCCESS;
+                    }
+                    else if (GoThroughDoor(bestExit) == State.FAILED)
+                    {
+                        nodeState = State.FAILED;
+                    }
+                }
+                else if (OpenDoor(bestExit) == State.FAILED)
                 {
                     nodeState = State.FAILED;
                 }
             }
-            else if (OpenDoor(bestExit) == State.FAILED)
+            else if (WalkToDoor(bestExit) == State.FAILED)
             {
                 nodeState = State.FAILED;
-            }*/
+            }
         }
-        else if (WalkToDoor(bestExit) == State.FAILED)
+        else
         {
-            nodeState = State.FAILED;
+            agent.Seek(chosenRoom.transform.position, ref nodeState);
+            if (nodeState == State.SUCCESS)
+            {
+                agent.speed = 0;
+            }
         }
 
         return nodeState;
@@ -242,80 +207,40 @@ public class BehaviourTree : MonoBehaviour
                 exit.reached = true;
             }
         }
+        else
+        {
+            nodeState = State.SUCCESS;
+        }
         
         return nodeState;
     }
 
 
-/*
-    bool FindNearbyEnemies()
+
+    State OpenDoor(Exit exit)
     {
-        if (chosenRoom.numberOfEnemies > 0) return true;
-        else return false;
-    }
-
-
-
-    int FindExitsInRoom()
-    {
-        int exitCount = chosenRoom.exits.Count;
-
-        for (int i = 0; i < chosenRoom.exits.Count; i++)
+        State nodeState = State.RUNNING;
+        if (exit.isBlocked)
         {
-            if (!chosenRoom.exits[i].isViableExit)
-            {
-                exitCount--;
-            }
+            exit.priority -= 10;
         }
-        return exitCount;
-    }
+        else nodeState = State.SUCCESS;
 
-
-
-    State WalkToDoor(Exit exit)
-    {
-        //if (!doorReached)
-        //{
-            State nodeState = new State();
-            agent.MoveToDoor(exit, ref nodeState);
-            return nodeState;
-        //}
-        //else return State.SUCCESS;
-    }
-
-
-
-    State TryDoor(Exit exit)
-    {
-        State nodeState = new State();
-        if (exit.isBlocked) nodeState = State.FAILED;
-        else 
-        {
-            agent.Seek(exit.roomForwards.gameObject.GetComponent<Collider2D>().bounds.center, ref nodeState);
-            if (nodeState == State.SUCCESS)
-            {
-                chosenRoom = agent.currentRoom;
-            }
-        }
         return nodeState;
     }
 
 
 
-    Exit FindFastestRoute()
+    State GoThroughDoor(Exit exit)
     {
-        //State nodeState = State.RUNNING;
-        Exit currentFastest = agent.currentRoom.exits[0];
-        for (int i = 1; i < agent.currentRoom.exits.Count; i++)
+        State nodeState = State.RUNNING;
+        agent.Seek(exit.roomForwards.transform.position, ref nodeState);
+
+        if (nodeState == State.SUCCESS)
         {
-            if (agent.currentRoom.exits[i].roomsToExitRoom < currentFastest.roomsToExitRoom)
-            {
-                currentFastest = agent.currentRoom.exits[i];
-            }
+
         }
-        
-        //agent.Seek(currentFastest.transform.position, ref nodeState);
-        return currentFastest;
+
+        return nodeState;
     }
-    */
 }

@@ -430,12 +430,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visited: 0
   isExitRoom: 0
-  numberOfEnemies: 0
   roomsAwayFromExit: 4
   connectedRooms:
   - {fileID: 1768854189}
   exits:
   - {fileID: 1742888689}
+  enemies:
+  - {fileID: 1169046943}
+  - {fileID: 1492064743}
 --- !u!61 &95422523
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -558,7 +560,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visited: 0
   isExitRoom: 0
-  numberOfEnemies: 0
   roomsAwayFromExit: 1
   connectedRooms:
   - {fileID: 650423133}
@@ -567,6 +568,7 @@ MonoBehaviour:
   - {fileID: 1254620825}
   exits:
   - {fileID: 151748945}
+  enemies: []
 --- !u!61 &96493995
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -639,8 +641,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBlocked: 0
+  reached: 0
   roomsToExitRoom: 1
   isViableExit: 1
+  priority: 0
   type: 0
   roomForwards: {fileID: 1080328083}
   roomBack: {fileID: 96493994}
@@ -881,13 +885,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visited: 0
   isExitRoom: 0
-  numberOfEnemies: 12222
   roomsAwayFromExit: 2
   connectedRooms:
   - {fileID: 1566149327}
   - {fileID: 96493994}
   exits:
   - {fileID: 1249546305}
+  enemies: []
 --- !u!61 &182404400
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1034,7 +1038,7 @@ GameObject:
   - component: {fileID: 339957275}
   - component: {fileID: 339957277}
   m_Layer: 0
-  m_Name: Door
+  m_Name: Door1
   m_TagString: Exit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1067,8 +1071,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBlocked: 1
+  reached: 0
   roomsToExitRoom: 3
   isViableExit: 1
+  priority: 0
   type: 0
   roomForwards: {fileID: 650423133}
   roomBack: {fileID: 1768854189}
@@ -1597,8 +1603,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBlocked: 0
+  reached: 0
   roomsToExitRoom: 5
   isViableExit: 1
+  priority: 0
   type: 0
   roomForwards: {fileID: 762366151}
   roomBack: {fileID: 1614878001}
@@ -1773,13 +1781,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visited: 0
   isExitRoom: 0
-  numberOfEnemies: 5
   roomsAwayFromExit: 2
   connectedRooms:
   - {fileID: 1768854189}
   - {fileID: 96493994}
   exits:
   - {fileID: 1475598744}
+  enemies: []
 --- !u!61 &650423134
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2009,13 +2017,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visited: 0
   isExitRoom: 0
-  numberOfEnemies: 0
   roomsAwayFromExit: 4
   connectedRooms:
   - {fileID: 1614878001}
   - {fileID: 1566149327}
   exits:
   - {fileID: 1357154724}
+  enemies: []
 --- !u!61 &762366152
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2233,7 +2241,7 @@ GameObject:
   - component: {fileID: 921584142}
   - component: {fileID: 921584144}
   m_Layer: 0
-  m_Name: Door
+  m_Name: Door3
   m_TagString: Exit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2266,8 +2274,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBlocked: 0
+  reached: 0
   roomsToExitRoom: 6
   isViableExit: 1
+  priority: 0
   type: 0
   roomForwards: {fileID: 1278916925}
   roomBack: {fileID: 1768854189}
@@ -2346,6 +2356,38 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.6, y: 3.9}
   m_EdgeRadius: 0
+--- !u!1 &925778269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 925778270}
+  m_Layer: 0
+  m_Name: Enemies
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &925778270
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925778269}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.9032338, y: -0.11735584, z: -15.724218}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1817635100}
+  - {fileID: 1456974281}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &942747029
 GameObject:
   m_ObjectHideFlags: 0
@@ -2442,13 +2484,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visited: 0
   isExitRoom: 0
-  numberOfEnemies: 0
   roomsAwayFromExit: 3
   connectedRooms:
   - {fileID: 2125786371}
   - {fileID: 1254620825}
   exits:
   - {fileID: 1232318709}
+  enemies: []
 --- !u!61 &942747033
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2521,8 +2563,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBlocked: 0
+  reached: 0
   roomsToExitRoom: 2
   isViableExit: 1
+  priority: 0
   type: 0
   roomForwards: {fileID: 96493994}
   roomBack: {fileID: 1254620825}
@@ -2697,10 +2741,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visited: 0
   isExitRoom: 1
-  numberOfEnemies: 0
   roomsAwayFromExit: 0
   connectedRooms: []
   exits: []
+  enemies: []
 --- !u!61 &1080328084
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2773,8 +2817,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBlocked: 0
+  reached: 0
   roomsToExitRoom: 4
   isViableExit: 1
+  priority: 0
   type: 0
   roomForwards: {fileID: 942747032}
   roomBack: {fileID: 2125786371}
@@ -2853,6 +2899,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.6, y: 3.9}
   m_EdgeRadius: 0
+--- !u!114 &1169046943 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7172426097673476703, guid: 8019763906b13084ba5e797e864a5439,
+    type: 3}
+  m_PrefabInstance: {fileID: 7172426096501591679}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fad881962514c2f47955bb13b32542b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1232318707
 GameObject:
   m_ObjectHideFlags: 0
@@ -2899,8 +2957,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBlocked: 0
+  reached: 0
   roomsToExitRoom: 3
   isViableExit: 1
+  priority: 0
   type: 0
   roomForwards: {fileID: 1254620825}
   roomBack: {fileID: 942747032}
@@ -3025,8 +3085,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBlocked: 0
+  reached: 0
   roomsToExitRoom: 2
   isViableExit: 1
+  priority: 0
   type: 0
   roomForwards: {fileID: 96493994}
   roomBack: {fileID: 182404399}
@@ -3201,13 +3263,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visited: 0
   isExitRoom: 0
-  numberOfEnemies: 0
   roomsAwayFromExit: 2
   connectedRooms:
   - {fileID: 942747032}
   - {fileID: 96493994}
   exits:
   - {fileID: 1035279913}
+  enemies: []
 --- !u!61 &1254620826
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3330,13 +3392,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visited: 0
   isExitRoom: 0
-  numberOfEnemies: 0
   roomsAwayFromExit: 4
   connectedRooms:
   - {fileID: 1768854189}
   - {fileID: 2125786371}
   exits:
   - {fileID: 2095553580}
+  enemies: []
 --- !u!61 &1278916926
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3409,8 +3471,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBlocked: 0
+  reached: 0
   roomsToExitRoom: 3
   isViableExit: 1
+  priority: 0
   type: 0
   roomForwards: {fileID: 182404399}
   roomBack: {fileID: 1566149327}
@@ -3535,8 +3599,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBlocked: 0
+  reached: 0
   roomsToExitRoom: 4
   isViableExit: 1
+  priority: 0
   type: 0
   roomForwards: {fileID: 1566149327}
   roomBack: {fileID: 762366151}
@@ -3615,6 +3681,12 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.6, y: 3.9}
   m_EdgeRadius: 0
+--- !u!4 &1456974281 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
+    type: 3}
+  m_PrefabInstance: {fileID: 2131803642}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1463401950
 GameObject:
   m_ObjectHideFlags: 0
@@ -3875,8 +3947,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBlocked: 0
+  reached: 0
   roomsToExitRoom: 2
   isViableExit: 1
+  priority: 0
   type: 0
   roomForwards: {fileID: 96493994}
   roomBack: {fileID: 650423133}
@@ -3968,7 +4042,7 @@ GameObject:
   - component: {fileID: 1479624453}
   - component: {fileID: 1479624455}
   m_Layer: 0
-  m_Name: Door
+  m_Name: Door2
   m_TagString: Exit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4001,8 +4075,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBlocked: 0
+  reached: 0
   roomsToExitRoom: 6
   isViableExit: 1
+  priority: 0
   type: 0
   roomForwards: {fileID: 1614878001}
   roomBack: {fileID: 1768854189}
@@ -4081,6 +4157,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.6, y: 3.9}
   m_EdgeRadius: 0
+--- !u!114 &1492064743 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7172426097673476703, guid: 8019763906b13084ba5e797e864a5439,
+    type: 3}
+  m_PrefabInstance: {fileID: 2131803642}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fad881962514c2f47955bb13b32542b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1566149324
 GameObject:
   m_ObjectHideFlags: 0
@@ -4177,13 +4265,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visited: 0
   isExitRoom: 0
-  numberOfEnemies: 0
   roomsAwayFromExit: 3
   connectedRooms:
   - {fileID: 762366151}
   - {fileID: 182404399}
   exits:
   - {fileID: 1308835082}
+  enemies: []
 --- !u!61 &1566149328
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4290,7 +4378,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1605057112}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -9, y: -0, z: 0}
+  m_LocalPosition: {x: -10.19, y: -0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4332,6 +4420,7 @@ MonoBehaviour:
   currentRoom: {fileID: 0}
   nextRoom: {fileID: 0}
   lastUsedDoor: {fileID: 0}
+  speed: 0
 --- !u!50 &1605057117
 Rigidbody2D:
   serializedVersion: 4
@@ -4382,10 +4471,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onPath: 0
-  enemiesClose: 0
   fighting: 0
-  doorReached: 0
   chosenRoom: {fileID: 0}
+  selectedEnemy: {fileID: 0}
+  enemies: []
 --- !u!1 &1614877998
 GameObject:
   m_ObjectHideFlags: 0
@@ -4482,13 +4571,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visited: 0
   isExitRoom: 0
-  numberOfEnemies: 1
   roomsAwayFromExit: 4
   connectedRooms:
   - {fileID: 762366151}
   - {fileID: 1768854189}
   exits:
   - {fileID: 646121020}
+  enemies: []
 --- !u!61 &1614878002
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4742,7 +4831,7 @@ GameObject:
   - component: {fileID: 1742888689}
   - component: {fileID: 1742888691}
   m_Layer: 0
-  m_Name: Door
+  m_Name: Door1
   m_TagString: Exit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4775,8 +4864,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBlocked: 0
+  reached: 0
   roomsToExitRoom: 4
   isViableExit: 1
+  priority: 0
   type: 0
   roomForwards: {fileID: 1768854189}
   roomBack: {fileID: 95422522}
@@ -4882,7 +4973,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1768854186}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.5477996, y: 0.0028739, z: 0}
+  m_LocalPosition: {x: -5.56, y: 0.0028739, z: 0}
   m_LocalScale: {x: 1.5748, y: 1.5748, z: 1.5748}
   m_Children: []
   m_Father: {fileID: 857585617}
@@ -4951,7 +5042,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visited: 0
   isExitRoom: 0
-  numberOfEnemies: 0
   roomsAwayFromExit: 3
   connectedRooms:
   - {fileID: 1278916925}
@@ -4962,6 +5052,7 @@ MonoBehaviour:
   - {fileID: 339957275}
   - {fileID: 1479624453}
   - {fileID: 921584142}
+  enemies: []
 --- !u!61 &1768854190
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4988,6 +5079,12 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.9700009, y: 1.58}
   m_EdgeRadius: 0
+--- !u!4 &1817635100 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
+    type: 3}
+  m_PrefabInstance: {fileID: 7172426096501591679}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1921691656
 GameObject:
   m_ObjectHideFlags: 0
@@ -5248,8 +5345,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBlocked: 0
+  reached: 0
   roomsToExitRoom: 5
   isViableExit: 1
+  priority: 0
   type: 0
   roomForwards: {fileID: 2125786371}
   roomBack: {fileID: 1278916925}
@@ -5424,13 +5523,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visited: 0
   isExitRoom: 0
-  numberOfEnemies: 1
   roomsAwayFromExit: 4
   connectedRooms:
   - {fileID: 1278916925}
   - {fileID: 942747032}
   exits:
   - {fileID: 1137791585}
+  enemies: []
 --- !u!61 &2125786372
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5457,47 +5556,136 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.97, y: 1.58}
   m_EdgeRadius: 0
+--- !u!1001 &2131803642
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 925778270}
+    m_Modifications:
+    - target: {fileID: 7172426096452998585, guid: 8019763906b13084ba5e797e864a5439,
+        type: 3}
+      propertyPath: m_Name
+      value: Enemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172426096452998585, guid: 8019763906b13084ba5e797e864a5439,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.026767
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.77735585
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 12.630273
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172426097673476705, guid: 8019763906b13084ba5e797e864a5439,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172426097673476702, guid: 8019763906b13084ba5e797e864a5439,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8019763906b13084ba5e797e864a5439, type: 3}
 --- !u!1001 &7172426096501591679
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 925778270}
     m_Modifications:
     - target: {fileID: 7172426096452998585, guid: 8019763906b13084ba5e797e864a5439,
         type: 3}
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 7172426096452998585, guid: 8019763906b13084ba5e797e864a5439,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.9461303
+      value: -6.786766
       objectReference: {fileID: 0}
     - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.54
+      value: -0.4926442
       objectReference: {fileID: 0}
     - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.0939453
+      value: 12.630273
       objectReference: {fileID: 0}
     - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
         type: 3}
@@ -5507,7 +5695,7 @@ PrefabInstance:
     - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7172426096452998584, guid: 8019763906b13084ba5e797e864a5439,
         type: 3}
@@ -5528,6 +5716,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172426097673476702, guid: 8019763906b13084ba5e797e864a5439,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8019763906b13084ba5e797e864a5439, type: 3}
