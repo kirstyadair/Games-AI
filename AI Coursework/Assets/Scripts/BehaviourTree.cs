@@ -14,15 +14,16 @@ public class BehaviourTree : MonoBehaviour
     public bool fighting;
     public bool doorReached;
     public Room chosenRoom;
-    EnemyAgentScript selectedEnemy;
+    public EnemyAgentScript selectedEnemy;
     AgentScript agent;
-    List<EnemyAgentScript> enemies;
+    public List<EnemyAgentScript> enemies;
     
 
     void Start()
     {
         agent = GetComponent<AgentScript>();
         chosenRoom = agent.currentRoom;
+        enemies = chosenRoom.enemies;
     }
 
     // Go through the behaviour tree each frame
@@ -37,34 +38,40 @@ public class BehaviourTree : MonoBehaviour
         if (FindEnemies() > 0)
         {
             selectedEnemy = enemies[0];
+            
             // Are the enemies close enough to attack?
             // If yes:
             if (AttackEnemies() == State.SUCCESS)
             {
-                FightEnemies();
+                if (!fighting)
+                {
+                    fighting = true;
+                    FightEnemies();
+                }
+                
             }
             // If no:
-            else if (AttackEnemies() == State.FAILED)
+            else
             {
                 SeekEnemies();
             }
         }
         else
         {
-            FindPath();
+            //FindPath();
         }
     }
 
     int FindEnemies()
     {
-        int count = chosenRoom.numberOfEnemies;
+        int count = chosenRoom.enemies.Count;
         return count;
     }
 
     State AttackEnemies()
     {
         State nodeState = new State();
-        if (Vector3.Distance(selectedEnemy.transform.position, transform.position) < 1)
+        if (Vector3.Distance(selectedEnemy.transform.position, transform.position) < 0.1f)
         {
             nodeState = State.SUCCESS;
         } 
@@ -131,7 +138,7 @@ public class BehaviourTree : MonoBehaviour
         
         return nodeState;
     }
-
+*/
 
 
     State FightEnemies()
@@ -145,12 +152,12 @@ public class BehaviourTree : MonoBehaviour
 
 
 
-    State SeekEnemy()
+    State SeekEnemies()
     {
         State nodeState = new State();
-        if (agent.currentAttackingEnemies.Count > 0)
+        if (selectedEnemy != null)
         {
-            agent.Seek(agent.currentAttackingEnemies[0].gameObject.transform.position, ref nodeState);
+            agent.Seek(selectedEnemy.gameObject.transform.position, ref nodeState);
         }
         else
         {
@@ -161,7 +168,7 @@ public class BehaviourTree : MonoBehaviour
     }
 
 
-
+/*
     bool FindNearbyEnemies()
     {
         if (chosenRoom.numberOfEnemies > 0) return true;

@@ -104,7 +104,7 @@ public class AgentScript : MonoBehaviour
             else 
             {
                 if (rooms[i].visited) continue;
-                else if (rooms[i].numberOfEnemies <= bestRoom.numberOfEnemies) bestRoom = rooms[i];
+                else if (rooms[i].enemies.Count <= bestRoom.enemies.Count) bestRoom = rooms[i];
             }
             
         }
@@ -118,7 +118,7 @@ public class AgentScript : MonoBehaviour
     {
 		desiredVelocity = Vector3.Normalize(targetPosition - transform.position) * 0.05f;
         transform.position += desiredVelocity;
-        if (Vector3.Distance(transform.position, targetPosition) < 1f)
+        if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
         {
             nodeState = State.SUCCESS;
         }
@@ -147,9 +147,9 @@ public class AgentScript : MonoBehaviour
         
             // Once all enemies killed
             Debug.Log("all killed");
-            
+            behaviourTree.fighting = false;
         }
-        behaviourTree.fighting = false;
+        
     }
 
 

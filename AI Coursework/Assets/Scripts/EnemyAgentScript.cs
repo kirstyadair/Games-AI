@@ -27,6 +27,7 @@ public class EnemyAgentScript : MonoBehaviour
     Vector3 desiredVelocity;
     int currentPatrolPoint = 1;
     float hitCooldown = 0.0f;
+    bool canMove = true;
 
 
     // Start is called before the first frame update
@@ -110,8 +111,12 @@ public class EnemyAgentScript : MonoBehaviour
 
     void Seek()
     {
-        desiredVelocity = Vector3.Normalize(agent.transform.position - transform.position) * 0.05f;
-        transform.position += desiredVelocity;
+        if (canMove)
+        {
+            desiredVelocity = Vector3.Normalize(agent.transform.position - transform.position) * 0.05f;
+            transform.position += desiredVelocity;
+        }
+        
 
         // Check if the agent is within viewing distance of the enemy
         float distanceBetweenAgents = Vector3.Distance(agent.transform.position, gameObject.transform.position);
@@ -121,6 +126,12 @@ public class EnemyAgentScript : MonoBehaviour
         }
         else if (distanceBetweenAgents <= attackDistance && !agent.GetComponent<BehaviourTree>().onPath)
         {
+            if (agent.gameObject.GetComponent<BehaviourTree>().selectedEnemy != this) 
+            {
+                canMove = false;
+                return;
+            }
+            else canMove = true;
             state = EnemyStates.ATTACKING;
             agent.GetComponent<AgentScript>().currentAttackingEnemies.Add(this);
             thisAnim.SetBool("Fight", true);
@@ -154,7 +165,7 @@ public class EnemyAgentScript : MonoBehaviour
         {
             GetComponent<Animator>().enabled = false;
             state = EnemyStates.DEAD;
-            enemyRoom.numberOfEnemies--;
+            enemyRoom.enemies.Remove(this);
         }
     }
 
