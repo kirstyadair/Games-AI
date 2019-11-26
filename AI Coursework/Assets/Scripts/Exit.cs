@@ -10,8 +10,10 @@ public enum ExitType
 public class Exit : MonoBehaviour
 {
     public bool isBlocked;
+    public bool reached;
     public float roomsToExitRoom;
     public bool isViableExit;
+    public int priority;
     public ExitType type;
     public Room roomForwards;
     public Room roomBack;

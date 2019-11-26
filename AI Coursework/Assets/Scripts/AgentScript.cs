@@ -60,10 +60,6 @@ public class AgentScript : MonoBehaviour
         {
             behaviourTree.onPath = true;
         }
-        if (other.tag == "Exit")
-        {
-            //behaviourTree.doorReached = true;
-        }
     }
 
 
