@@ -8,6 +8,11 @@ public class Room : MonoBehaviour
     public bool isExitRoom;
     public int roomsAwayFromExit;
     public List<Room> connectedRooms;
-    public List<Exit> exits;
+    public Exit[] exits;
     public List<EnemyAgentScript> enemies;
+
+    void Start()
+    {
+        exits = GetComponentsInChildren<Exit>();
+    }
 }

@@ -17,4 +17,23 @@ public class Exit : MonoBehaviour
     public ExitType type;
     public Room roomForwards;
     public Room roomBack;
+
+    Transform padlock;
+
+    void Start()
+    {
+        padlock = gameObject.transform.Find("Padlock");
+    }
+
+    void Update()
+    {
+        if (isBlocked)
+        {
+            padlock.gameObject.SetActive(true);
+        }
+        else
+        {
+            padlock.gameObject.SetActive(false);
+        }
+    }
 }

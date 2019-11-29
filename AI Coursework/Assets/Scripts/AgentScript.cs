@@ -19,7 +19,6 @@ public class AgentScript : MonoBehaviour
 
     void Start()
     {
-        speed = 0.05f;
         currentRoom = startRoom;
         currentRoom.visited = true;
         behaviourTree = GetComponent<BehaviourTree>();
@@ -61,6 +60,10 @@ public class AgentScript : MonoBehaviour
         if (other.tag == "Path")
         {
             behaviourTree.onPath = true;
+        }
+        if (other.tag == "Exit")
+        {
+            lastUsedDoor = other.GetComponent<Exit>();
         }
     }
 
