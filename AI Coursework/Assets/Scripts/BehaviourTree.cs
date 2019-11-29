@@ -23,7 +23,6 @@ public class BehaviourTree : MonoBehaviour
     {
         agent = GetComponent<AgentScript>();
         chosenRoom = agent.currentRoom;
-        enemies = chosenRoom.enemies;
     }
 
 
@@ -31,6 +30,7 @@ public class BehaviourTree : MonoBehaviour
     // Go through the behaviour tree each frame
     void Update()
     {
+        enemies = chosenRoom.enemies;
         chosenRoom = agent.currentRoom;
         StartNode();
     }
