@@ -36,5 +36,8 @@ public class Exit : MonoBehaviour
         {
             padlock.gameObject.SetActive(false);
         }
+
+        
+
     }
 }

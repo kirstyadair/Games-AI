@@ -271,6 +271,7 @@ public class BehaviourTree : MonoBehaviour
                 if (chosenRoom.exits[i].type == ExitType.WINDOW) chosenRoom.exits[i].priority--;
                 // If the exit is blocked, -10 to priority
                 if (chosenRoom.exits[i].isBlocked) chosenRoom.exits[i].priority -= 10;
+                // If the exit has been visited already, -10 to priority.  This prevents oscillation
                 if (chosenRoom.exits[i].exitVisited) chosenRoom.exits[i].priority -= 10;
                 // Subtract the number of enemies from priority
                 chosenRoom.exits[i].priority -= chosenRoom.exits[i].roomForwards.enemies.Count;

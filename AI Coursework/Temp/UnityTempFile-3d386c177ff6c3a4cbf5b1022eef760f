@@ -292,8 +292,4 @@ Assets\Scripts\AgentScript.cs
 Assets\Scripts\BehaviourTree.cs
 Assets\Scripts\EnemyAgentScript.cs
 Assets\Scripts\Exit.cs
-"Assets\Scripts\Node Editor\Connection.cs"
-"Assets\Scripts\Node Editor\Node.cs"
-"Assets\Scripts\Node Editor\NodeConnectionPoint.cs"
-"Assets\Scripts\Node Editor\NodeEditor.cs"
 Assets\Scripts\Room.cs
