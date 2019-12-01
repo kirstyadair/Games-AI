@@ -152,18 +152,11 @@ public class BehaviourTree : MonoBehaviour
 
                 if (WalkToDoor(bestExit) == State.SUCCESS)
                 {
-                    if (OpenDoor(bestExit) == State.SUCCESS)
+                    if (GoThroughDoor(bestExit) == State.SUCCESS)
                     {
-                        if (GoThroughDoor(bestExit) == State.SUCCESS)
-                        {
-                            nodeState = State.SUCCESS;
-                        }
-                        else if (GoThroughDoor(bestExit) == State.FAILED)
-                        {
-                            nodeState = State.FAILED;
-                        }
+                        nodeState = State.SUCCESS;
                     }
-                    else if (OpenDoor(bestExit) == State.FAILED)
+                    else if (GoThroughDoor(bestExit) == State.FAILED)
                     {
                         nodeState = State.FAILED;
                     }
@@ -210,16 +203,6 @@ public class BehaviourTree : MonoBehaviour
             nodeState = State.SUCCESS;
         }
         
-        return nodeState;
-    }
-
-
-
-    State OpenDoor(Exit exit)
-    {
-        State nodeState = State.RUNNING;
-        if (!exit.isBlocked) nodeState = State.SUCCESS;
-
         return nodeState;
     }
 
@@ -279,21 +262,30 @@ public class BehaviourTree : MonoBehaviour
         {
             chosenRoom.exits[i].priority = 0;
 
+            // Check if the exit is viable
             if (chosenRoom.exits[i].isViableExit)
             {
+                // Add 1 to priority if the exit is a door
                 if (chosenRoom.exits[i].type == ExitType.DOOR) chosenRoom.exits[i].priority++;
+                // Minus 1 if the exit is a window
+                if (chosenRoom.exits[i].type == ExitType.WINDOW) chosenRoom.exits[i].priority--;
+                // If the exit is blocked, -10 to priority
                 if (chosenRoom.exits[i].isBlocked) chosenRoom.exits[i].priority -= 10;
+                if (chosenRoom.exits[i].exitVisited) chosenRoom.exits[i].priority -= 10;
+                // Subtract the number of enemies from priority
                 chosenRoom.exits[i].priority -= chosenRoom.exits[i].roomForwards.enemies.Count;
             }
             else
             {
+                // If the exit is not viable, -100 to priority
                 chosenRoom.exits[i].priority -= 100;
             }
             
-
+            // Subtract the number of remaining rooms from priority
             chosenRoom.exits[i].priority -= (int)chosenRoom.exits[i].roomsToExitRoom;
         }
 
+        // With the priority worked out, check against all other exit priorities and find the highest
         bestExit = chosenRoom.exits[0];
 
         for (int i = 1; i < chosenRoom.exits.Length; i++)
