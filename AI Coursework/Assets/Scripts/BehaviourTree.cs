@@ -283,6 +283,7 @@ public class BehaviourTree : MonoBehaviour
             {
                 if (chosenRoom.exits[i].type == ExitType.DOOR) chosenRoom.exits[i].priority++;
                 if (chosenRoom.exits[i].isBlocked) chosenRoom.exits[i].priority -= 10;
+                chosenRoom.exits[i].priority -= chosenRoom.exits[i].roomForwards.enemies.Count;
             }
             else
             {
