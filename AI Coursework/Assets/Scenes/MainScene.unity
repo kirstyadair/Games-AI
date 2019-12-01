@@ -3555,7 +3555,7 @@ PrefabInstance:
     - target: {fileID: 8815064205806666885, guid: 7019172a84fbadd438008ff07b140f75,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.7003263
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 8815064205806666885, guid: 7019172a84fbadd438008ff07b140f75,
         type: 3}
@@ -3626,7 +3626,7 @@ PrefabInstance:
         type: 3}
       propertyPath: roomForwards
       value: 
-      objectReference: {fileID: 1278916925}
+      objectReference: {fileID: 1614878001}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7019172a84fbadd438008ff07b140f75, type: 3}
 --- !u!1001 &1058483420
@@ -6791,7 +6791,7 @@ PrefabInstance:
     - target: {fileID: 8281917809239168454, guid: 19ed8a5514a210c4cb76e1131df4ba99,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.71
+      value: -0.72
       objectReference: {fileID: 0}
     - target: {fileID: 8281917809239168454, guid: 19ed8a5514a210c4cb76e1131df4ba99,
         type: 3}
@@ -6847,7 +6847,7 @@ PrefabInstance:
         type: 3}
       propertyPath: roomForwards
       value: 
-      objectReference: {fileID: 1614878001}
+      objectReference: {fileID: 1278916925}
     - target: {fileID: 8281917809239168455, guid: 19ed8a5514a210c4cb76e1131df4ba99,
         type: 3}
       propertyPath: roomBack
