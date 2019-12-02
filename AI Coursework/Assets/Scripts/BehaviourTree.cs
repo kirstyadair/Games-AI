@@ -143,15 +143,33 @@ public class BehaviourTree : MonoBehaviour
             {
                 FindExits();
 
-                if (bestExit.isBlocked) 
-                {
-                    nodeState = State.FAILED;
-                    return nodeState;
-                }
+                
 
 
                 if (WalkToDoor(bestExit) == State.SUCCESS)
                 {
+                    if (bestExit.isBlocked) 
+                    {
+                        if (!bestExit.tried)
+                        {
+                            if (!TryDoor())
+                            {
+                                Debug.Log("failed");
+                                nodeState = State.FAILED;
+                                return nodeState;
+                            }
+                            else
+                            {
+                                Debug.Log("succeeded");
+                                bestExit.isBlocked = false;
+                            }
+                            bestExit.tried = true;
+                        }
+                        else
+                        {
+                            return nodeState = State.FAILED;
+                        }
+                    }
                     if (GoThroughDoor(bestExit) == State.SUCCESS)
                     {
                         nodeState = State.SUCCESS;
@@ -269,8 +287,8 @@ public class BehaviourTree : MonoBehaviour
                 if (chosenRoom.exits[i].type == ExitType.DOOR) chosenRoom.exits[i].priority++;
                 // Minus 1 if the exit is a window
                 if (chosenRoom.exits[i].type == ExitType.WINDOW) chosenRoom.exits[i].priority--;
-                // If the exit is blocked, -10 to priority
-                if (chosenRoom.exits[i].isBlocked) chosenRoom.exits[i].priority -= 10;
+                // If the exit is blocked, -5 to priority
+                if (chosenRoom.exits[i].isBlocked) chosenRoom.exits[i].priority -= 5;
                 // If the exit has been visited already, -10 to priority.  This prevents oscillation
                 if (chosenRoom.exits[i].exitVisited) chosenRoom.exits[i].priority -= 10;
                 // Subtract the number of enemies from priority
@@ -293,5 +311,13 @@ public class BehaviourTree : MonoBehaviour
         {
             if (chosenRoom.exits[i].priority > bestExit.priority) bestExit = chosenRoom.exits[i];
         }
+    }
+
+
+
+    bool TryDoor()
+    {
+        // Randomly decide whether this was successful or unsuccessful
+        return (Random.value > 0.5f);
     }
 }

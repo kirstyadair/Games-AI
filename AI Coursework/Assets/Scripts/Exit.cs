@@ -15,6 +15,7 @@ public class Exit : MonoBehaviour
     public float roomsToExitRoom;
     public bool isViableExit;
     public int priority;
+    public bool tried;
     public ExitType type;
     public Room roomForwards;
     public Room roomBack;
