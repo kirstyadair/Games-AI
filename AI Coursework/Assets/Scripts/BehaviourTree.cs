@@ -143,24 +143,24 @@ public class BehaviourTree : MonoBehaviour
             {
                 FindExits();
 
-                
-
-
                 if (WalkToDoor(bestExit) == State.SUCCESS)
                 {
+                    // If the exit with the highest priority is blocked
                     if (bestExit.isBlocked) 
                     {
+                        // If the agent has not already tried to break the exit
                         if (!bestExit.tried)
                         {
+                            // If TryDoor returns false
                             if (!TryDoor())
                             {
-                                Debug.Log("failed");
+                                // Return failure
                                 nodeState = State.FAILED;
                                 return nodeState;
                             }
                             else
                             {
-                                Debug.Log("succeeded");
+                                // If successful, set isBlocked to false
                                 bestExit.isBlocked = false;
                             }
                             bestExit.tried = true;
@@ -245,14 +245,13 @@ public class BehaviourTree : MonoBehaviour
     {
         State nodeState = State.RUNNING;
 
+        // Seek the center of the room connected to the last used door
         agent.Seek(agent.lastUsedDoor.roomBack.transform.position, ref nodeState);
 
         if (nodeState == State.SUCCESS)
         {
-            if (AttemptAnotherDoor() != State.RUNNING)
-            {
-
-            }
+            // Once in the room, find another door to exit through
+            AttemptAnotherDoor();
         }
 
         return nodeState;
@@ -260,15 +259,11 @@ public class BehaviourTree : MonoBehaviour
 
 
 
-    State AttemptAnotherDoor()
+    void AttemptAnotherDoor()
     {
-        State nodeState = State.RUNNING;
-
         agent.lastUsedDoor.isViableExit = false;
         FindExits();
         goingBack = false;
-
-        return nodeState;
     }
 
 
